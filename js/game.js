@@ -105,13 +105,13 @@ class Game {
     
     // 显示开始屏幕
     showStartScreen() {
-        this.ctx.fillStyle = '#87CEEB';
+        this.ctx.fillStyle = '#c5e7f5';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.ctx.fillStyle = '#000';
         this.ctx.font = '48px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('数字消除游戏', this.canvas.width/2, this.canvas.height/2 - 50);
+        this.ctx.fillText('数学游戏', this.canvas.width/2, this.canvas.height/2 - 50);
         this.ctx.font = '24px Arial';
         this.ctx.fillText('手机需要横屏玩', this.canvas.width/2, this.canvas.height/2 + 50);
     }
@@ -140,14 +140,21 @@ class Game {
     // 生成新数字
     spawnNumber() {
         const size = Math.random() * (this.numberConfig.maxSize - this.numberConfig.minSize) + this.numberConfig.minSize;
-        const x = Math.random() * (this.canvas.width - size * 3); // 增加宽度以适应题目
         
-        // 生成加法题（结果在9��内）
+        // 计算题目文本的预计宽度（一个数字大约占用 size 的宽度，加号和等号各占 size）
+        const questionWidth = size * 5; // "1 + 1 = ?" 大约需要 5 个字符的宽度
+        
+        // 确保 x 坐标在有效范围内
+        const minX = size; // 左边界留出一个字符宽度的空间
+        const maxX = this.canvas.width - questionWidth; // 右边界减去整个问题的宽度
+        const x = minX + Math.random() * (maxX - minX); // 在有效范围内随机生成 x 坐标
+        
+        // 生成加法题（结果在10以内）
         let num1, num2;
         do {
-            num1 = Math.floor(Math.random() * 9) + 1;
-            num2 = Math.floor(Math.random() * 9) + 1;
-        } while (num1 + num2 > 9);
+            num1 = Math.floor(Math.random() * 9) + 1; // 1-9
+            num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+        } while (num1 + num2 > 10);
         
         const number = {
             num1: num1,
@@ -201,7 +208,7 @@ class Game {
                     p.size *= 0.95;
                 });
                 
-                // 移除消失的���子
+                // 移除消失的粒子
                 particles = particles.filter(p => p.life > 0);
                 
                 return particles.length > 0;
@@ -228,7 +235,7 @@ class Game {
     // 绘制游戏
     draw() {
         // 清空画布
-        this.ctx.fillStyle = '#87CEEB';
+        this.ctx.fillStyle = '#c5e7f5';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // 绘制加法题
