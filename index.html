@@ -11,6 +11,7 @@
         <div class="game-controls">
             <button id="startBtn" class="control-btn">开始游戏</button>
             <button id="pauseBtn" class="control-btn" disabled>暂停</button>
+            <button id="muteBtn" class="control-btn">🔊</button>
         </div>
         <canvas id="gameCanvas"></canvas>
         <div class="number-buttons">
@@ -26,6 +27,7 @@
             <button data-number="9">9</button>
         </div>
     </div>
+    <script src="js/audio.js"></script>
     <script src="js/game.js"></script>
     <script>
         window.addEventListener('load', () => {
@@ -58,6 +60,12 @@
                         game.checkNumber(number);
                     }
                 });
+            });
+
+            // 添加静音按钮事件
+            document.getElementById('muteBtn').addEventListener('click', () => {
+                const isMuted = game.audioManager.toggleMute();
+                document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '🔊';
             });
         });
     </script>

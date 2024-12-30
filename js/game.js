@@ -98,6 +98,9 @@ class Game {
         
         // 初始化画布大小
         this.resizeCanvas();
+        
+        // 初始化音效管理器
+        this.audioManager = new AudioManager();
     }
     
     // 显示开始屏幕
@@ -407,7 +410,10 @@ class Game {
             // 增加分数
             this.score += 10;
             
-            // 检��关卡���度
+            // 播放消除音效
+            this.audioManager.play('pop');
+            
+            // 检查关卡进度
             this.checkLevelProgress();
         }
     }
@@ -502,6 +508,9 @@ class Game {
         
         // 增加游戏难度 - 每关增加20%的速度
         this.numberConfig.speed = 0.5 * (1 + (this.level.current - 1) * 0.2);
+        
+        // 播放升级音效
+        this.audioManager.play('levelUp');
         
         // 显示过关效果
         this.showLevelUpEffects();
