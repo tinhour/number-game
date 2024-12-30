@@ -27,10 +27,14 @@
             <button data-number="9">9</button>
         </div>
     </div>
+    <!-- 先加载音频管理器 -->
     <script src="js/audio.js"></script>
+    <!-- 再加载游戏主逻辑 -->
     <script src="js/game.js"></script>
     <script>
+        // 等待所有资源加载完成
         window.addEventListener('load', () => {
+            // 确保游戏实例创建完成后再绑定事件
             const game = new Game();
             
             // 控制按钮事件
@@ -62,11 +66,14 @@
                 });
             });
 
-            // 添加静音按钮事件
-            document.getElementById('muteBtn').addEventListener('click', () => {
-                const isMuted = game.audioManager.toggleMute();
-                document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '🔊';
-            });
+            // 确保游戏实例存在后再绑定静音按钮事件
+            const muteBtn = document.getElementById('muteBtn');
+            if (game && game.audioManager) {
+                muteBtn.addEventListener('click', () => {
+                    const isMuted = game.audioManager.toggleMute();
+                    muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                });
+            }
         });
     </script>
 </body>
