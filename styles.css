@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#gameCanvas {
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.number-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+}
+
+.number-buttons button {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.3s;
+}
+
+.number-buttons button:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.number-buttons button:active {
+    transform: scale(0.95);
+}
+
+.game-controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.control-btn:hover {
+    background-color: #45a049;
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.control-btn:disabled:hover {
+    background-color: #cccccc;
+    transform: none;
+} 

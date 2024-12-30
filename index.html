@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字消除游戏</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-controls">
+            <button id="startBtn" class="control-btn">开始游戏</button>
+            <button id="pauseBtn" class="control-btn" disabled>暂停</button>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="number-buttons">
+            <button data-number="0">0</button>
+            <button data-number="1">1</button>
+            <button data-number="2">2</button>
+            <button data-number="3">3</button>
+            <button data-number="4">4</button>
+            <button data-number="5">5</button>
+            <button data-number="6">6</button>
+            <button data-number="7">7</button>
+            <button data-number="8">8</button>
+            <button data-number="9">9</button>
+        </div>
+    </div>
+    <script src="js/game.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const game = new Game();
+            
+            // 控制按钮事件
+            document.getElementById('startBtn').addEventListener('click', () => {
+                if (game.gameOver || game.isPaused) {
+                    game.start();
+                    document.getElementById('startBtn').textContent = '重新开始';
+                    document.getElementById('pauseBtn').disabled = false;
+                }
+            });
+            
+            document.getElementById('pauseBtn').addEventListener('click', () => {
+                if (game.isPaused) {
+                    game.resume();
+                    document.getElementById('pauseBtn').textContent = '暂停';
+                } else {
+                    game.pause();
+                    document.getElementById('pauseBtn').textContent = '继续';
+                }
+            });
+            
+            // 添加按钮点击事件
+            document.querySelectorAll('.number-buttons button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const number = parseInt(button.dataset.number);
+                    if (!game.gameOver) {
+                        game.checkNumber(number);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
