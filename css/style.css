@@ -1,0 +1,139 @@
+/* 基础样式 */
+:root {
+  --card-size: clamp(60px, 15vw, 120px);
+  --card-font-size: clamp(24px, 6vw, 48px);
+  --gap-size: clamp(8px, 2vw, 16px);
+}
+
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--card-size));
+  gap: var(--gap-size);
+  justify-content: center;
+  padding: var(--gap-size);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  width: var(--card-size);
+  height: var(--card-size);
+  font-size: var(--card-font-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  button {
+    min-height: 44px; /* 触摸友好的按钮大小 */
+    padding: 12px 20px;
+  }
+  
+  /* 横屏模式优化 */
+  @media (orientation: landscape) {
+    .game-container {
+      --card-size: clamp(40px, 12vh, 100px);
+      --card-font-size: clamp(16px, 4vh, 36px);
+    }
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+  
+  .card:active {
+    transform: scale(0.95);
+  }
+} 
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--gap-size);
+    margin: 20px 0;
+    padding: var(--gap-size);
+}
+
+.card {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card.matched {
+    background-color: #888;
+    cursor: default;
+}
+
+.game-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2196F3;
+    color: white;
+    cursor: pointer;
+}
+
+.control-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.score, .timer {
+    font-size: 18px;
+    margin: 0 10px;
+}
+
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.number-buttons button {
+    padding: 10px;
+    font-size: var(--card-font-size);
+    border: none;
+    border-radius: 4px;
+    background-color: #FF9800;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .game-controls {
+        flex-direction: column;
+    }
+    
+    .number-buttons {
+        grid-template-columns: repeat(5, 1fr);
+    }
+} 

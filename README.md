@@ -2,7 +2,7 @@
 
 ![游戏截图](https://github.com/tinhour/number-game/raw/main/screenshots/gameplay.png)
 
-一个简单有趣的数字游戏，使用HTML5 + JavaScript开发。玩家需要在规定时间内找出所有匹配的数字对，适合儿童玩耍。
+一个简单有趣的数字游戏，使用HTML5 + JavaScript开发。玩家需要在规定时间内计算出数字结果，适合儿童玩耍。
 
 ## ✨ 特性
 
