@@ -113,7 +113,7 @@ class Game {
         this.ctx.textAlign = 'center';
         this.ctx.fillText('数字消除游戏', this.canvas.width/2, this.canvas.height/2 - 50);
         this.ctx.font = '24px Arial';
-        this.ctx.fillText('点击"开始游戏"按钮开始', this.canvas.width/2, this.canvas.height/2 + 50);
+        this.ctx.fillText('手机需要横屏玩', this.canvas.width/2, this.canvas.height/2 + 50);
     }
     
     // 开始游戏
