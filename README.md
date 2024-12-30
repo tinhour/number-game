@@ -1,4 +1,4 @@
-# Number Game
+# 数学游戏
 
 ![游戏截图](https://github.com/tinhour/number-game/raw/main/screenshots/gameplay.png)
 

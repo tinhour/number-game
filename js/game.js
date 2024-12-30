@@ -82,6 +82,22 @@ class Game {
         
         // 绑定事件
         this.bindEvents();  // 添加事件绑定调用
+        
+        // 添加窗口大小变化监听
+        this.resizeHandler = () => {
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => {
+                this.resizeCanvas();
+            }, 250); // 防抖，避免频繁调整
+        };
+        
+        window.addEventListener('resize', this.resizeHandler);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => this.resizeCanvas(), 100);
+        });
+        
+        // 初始化画布大小
+        this.resizeCanvas();
     }
     
     // 显示开始屏幕
@@ -558,7 +574,7 @@ class Game {
         }, 3000);
     }
     
-    // 修��过关烟��效果
+    // 修改过关烟花效果
     addLevelUpFirework(x, y) {
         const particles = [];
         const colors = [
@@ -634,5 +650,51 @@ class Game {
         this.ctx.fillStyle = '#FF69B4';
         this.ctx.fillText(`最终得分: ${this.score}`, centerX, centerY + 30);
         this.ctx.fillText('点击"重新开始"按钮重玩', centerX, centerY + 80);
+    }
+    
+    resizeCanvas() {
+        // 获取容器尺寸
+        const container = document.querySelector('.game-container');
+        const containerWidth = container.clientWidth;
+        
+        // 计算理想的画布尺寸
+        let canvasWidth = Math.min(containerWidth - 20, 800);
+        let canvasHeight = Math.min(window.innerHeight * 0.6, 600);
+        
+        // 确保画布尺寸为偶数，避免渲染问题
+        canvasWidth = Math.floor(canvasWidth / 2) * 2;
+        canvasHeight = Math.floor(canvasHeight / 2) * 2;
+        
+        // 更新画布尺寸
+        if (this.canvas.width !== canvasWidth || this.canvas.height !== canvasHeight) {
+            this.canvas.width = canvasWidth;
+            this.canvas.height = canvasHeight;
+            
+            // 调整游戏参数以适应新尺寸
+            this.adjustGameParameters();
+        }
+        
+        // 重新绘制游戏
+        if (!this.gameOver && !this.isPaused) {
+            this.draw();
+        } else {
+            // 如果游戏未开始，显示开始屏幕
+            this.showStartScreen();
+        }
+    }
+    
+    adjustGameParameters() {
+        // 根据画布大小调整游戏参数
+        const scale = this.canvas.width / 800; // 使用800作为基准宽度
+        
+        // 调整数字大小
+        this.numberConfig.minSize = Math.max(20, Math.floor(30 * scale));
+        this.numberConfig.maxSize = Math.max(30, Math.floor(50 * scale));
+        
+        // 调整速度
+        this.numberConfig.speed = Math.max(0.3, 0.5 * scale);
+        
+        // 调整生成位置范围
+        this.level.halfScreenHeight = this.canvas.height / 2;
     }
 } 
