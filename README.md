@@ -23,7 +23,7 @@
 
 1. 克隆仓库：
 bash
-git clone https://github.com/tinhour/NumberGame
+git clone https://github.com/tinhour/NumberGame.git
 bash
 mk number-game && cd number-game
 number-game/
